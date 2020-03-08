@@ -19,3 +19,5 @@ MumbleSharp/bin
 MumbleSharp/obj
 MumbleSharpTest/bin
 MumbleSharpTest/obj
+
+*.DS_Store

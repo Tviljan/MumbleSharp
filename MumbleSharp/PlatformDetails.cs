@@ -35,14 +35,23 @@ namespace MumbleSharp
     {
         static PlatformDetails()
         {
-            if (Directory.Exists("/Applications")
-                && Directory.Exists("/System")
-                && Directory.Exists("/Users")
-                && Directory.Exists("/Volumes"))
+            if (Environment.OSVersion.Platform == PlatformID.MacOSX)
+            {
                 IsMac = true;
-			if (Environment.OSVersion.Platform == PlatformID.Win32NT ||
-				Environment.OSVersion.Platform == PlatformID.Win32Windows)
-				IsWindows = true;
+                Console.WriteLine("Hi I'm a mac!");
+            }
+            else if (Environment.OSVersion.Platform == PlatformID.Win32NT ||
+                Environment.OSVersion.Platform == PlatformID.Win32Windows)
+            {
+                IsWindows = true;
+                Console.WriteLine("Hi I'm a Windows!");
+            }
+            else
+            {
+                // TODO: STOP ASSUMING iOS if not Mac or Windows! Use a positive check!
+                IsiOS = true;
+                Console.WriteLine("Hi I'm an iOS!");
+            }
         }
 
         /// <summary>
@@ -55,5 +64,17 @@ namespace MumbleSharp
 		/// </summary>
 		/// <value><c>true</c> if is windows; otherwise, <c>false</c>.</value>
 		public static bool IsWindows { get; private set; }
+
+        /// <summary>
+		/// Gets if the current system is iOS
+		/// </summary>
+		/// <value><c>true</c> if is iOS; otherwise, <c>false</c>.</value>
+		public static bool IsiOS { get; private set; }
+
+        /// <summary>
+        /// Gets if the current system is Android
+        /// </summary>
+        /// <value><c>true</c> if is Android; otherwise, <c>false</c>.</value>
+        public static bool IsAndroid { get; private set; }
     }
 }
