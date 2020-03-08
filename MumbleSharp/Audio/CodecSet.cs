@@ -1,6 +1,7 @@
 ﻿using MumbleSharp.Audio.Codecs;
 using MumbleSharp.Audio.Codecs.CeltAlpha;
 using MumbleSharp.Audio.Codecs.CeltBeta;
+using MumbleSharp.Audio.Codecs.Concentus;
 using MumbleSharp.Audio.Codecs.Opus;
 using MumbleSharp.Audio.Codecs.Speex;
 using System;
@@ -13,6 +14,7 @@ namespace MumbleSharp.Audio
         private readonly Lazy<CeltBetaCodec> _beta;
         private readonly Lazy<SpeexCodec> _speex;
         private readonly Lazy<OpusCodec> _opus;
+        private readonly Lazy<ConcentusCodec> _concentus;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CodecSet"/> class.
@@ -27,6 +29,7 @@ namespace MumbleSharp.Audio
             _beta = new Lazy<CeltBetaCodec>();
             _speex = new Lazy<SpeexCodec>();
             _opus = new Lazy<OpusCodec>(() => new OpusCodec(sampleRate, sampleBits, sampleChannels, frameSize));
+            _concentus = new Lazy<ConcentusCodec>(() => new ConcentusCodec(sampleRate, sampleBits, sampleChannels, frameSize));
         }
 
         protected internal IVoiceCodec GetCodec(SpeechCodecs codec)
@@ -40,7 +43,14 @@ namespace MumbleSharp.Audio
                 case SpeechCodecs.CeltBeta:
                     return _beta.Value;
                 case SpeechCodecs.Opus:
-                    return _opus.Value;
+                    if (PlatformDetails.IsiOS || PlatformDetails.IsAndroid)
+                    {
+                        return _concentus.Value;
+                    }
+                    else
+                    {
+                        return _opus.Value;
+                    }
                 default:
                     throw new ArgumentOutOfRangeException("codec");
             }

@@ -38,12 +38,10 @@ For more info on Mumble please visit https://www.mumble.info/</Description>
     <Content Include="..\LICENSE" Link="LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="..\mumblesharp.png" Link="mumblesharp.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="mumblesharp.ico" />
   </ItemGroup>
@@ -51,6 +49,7 @@ For more info on Mumble please visit https://www.mumble.info/</Description>
   <ItemGroup>
     <PackageReference Include="NAudio" Version="1.10.0" />
     <PackageReference Include="protobuf-net" Version="2.4.4" />
+    <PackageReference Include="Concentus" Version="1.1.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,4 +61,7 @@ For more info on Mumble please visit https://www.mumble.info/</Description>
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Audio\Codecs\Concentus\" />
+  </ItemGroup>
 </Project>
