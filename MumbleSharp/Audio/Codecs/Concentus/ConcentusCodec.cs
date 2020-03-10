@@ -60,7 +60,7 @@ namespace MumbleSharp.Audio.Codecs.Concentus
             }
 
             byte[] dst = new byte[outputBuffer.Length * 2];
-            Buffer.BlockCopy(outputBuffer, 0, dst, 0, outputBuffer.Length);
+            Buffer.BlockCopy(outputBuffer, 0, dst, 0, outputBuffer.Length * 2);
 
             return dst;
 
