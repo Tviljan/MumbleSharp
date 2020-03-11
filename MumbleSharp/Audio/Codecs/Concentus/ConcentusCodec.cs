@@ -52,7 +52,7 @@ namespace MumbleSharp.Audio.Codecs.Concentus
 
             short[] outputBuffer = new short[frameSize];
 
-            int length = _decoder.Decode(encodedData, 0, encodedData.Length, outputBuffer, 0, frameSize, decode_fec: true);
+            int length = _decoder.Decode(encodedData, 0, encodedData.Length, outputBuffer, 0, frameSize, decode_fec: false);
 
             if (length != outputBuffer.Length)
             {
